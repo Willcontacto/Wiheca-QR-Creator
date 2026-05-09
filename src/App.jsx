@@ -13,6 +13,7 @@ export default function QRGeneratorApp() {
   const [customBgColor, setCustomBgColor] = useState('#FFFFFF');
   const [showQrPicker, setShowQrPicker] = useState(false);
   const [showBgPicker, setShowBgPicker] = useState(false);
+  const [glowing, setGlowing] = useState(false);
 
   const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=600x600&data=${encodeURIComponent(generatedText)}&color=${color.replace('#','')}&bgcolor=${bgColor.replace('#','')}&margin=20`;
 
@@ -58,7 +59,23 @@ export default function QRGeneratorApp() {
 
           {/* Botón generar */}
           <button
-            onClick={() => setGeneratedText(text)}
+            onClick={() => {
+  setGeneratedText(text);
+  setGlowing(true);
+  setTimeout(() => setGlowing(false), 1200);
+  const ctx = new (window.AudioContext || window.webkitAudioContext)();
+  const o = ctx.createOscillator();
+  const g = ctx.createGain();
+  o.connect(g);
+  g.connect(ctx.destination);
+  o.type = 'sine';
+  o.frequency.setValueAtTime(520, ctx.currentTime);
+  o.frequency.exponentialRampToValueAtTime(880, ctx.currentTime + 0.15);
+  g.gain.setValueAtTime(0.3, ctx.currentTime);
+  g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.6);
+  o.start(ctx.currentTime);
+  o.stop(ctx.currentTime + 0.6);
+}}
             className="w-full h-14 rounded-2xl text-base font-semibold bg-violet-600 hover:bg-violet-700 text-white transition">
             ✨ Generar QR
           </button>
@@ -117,7 +134,7 @@ export default function QRGeneratorApp() {
           </div>
           <div className="flex-1 bg-white border border-slate-100 rounded-3xl shadow-inner flex items-center justify-center min-h-[500px]">
             <img src={qrUrl} alt="QR Code" onClick={() => setIsExpanded(true)}
-              className="w-80 h-80 cursor-pointer transition hover:scale-105 rounded-xl" />
+              className={`w-80 h-80 cursor-pointer transition hover:scale-105 rounded-xl ${glowing ? 'ring-4 ring-violet-400 ring-offset-4 shadow-[0_0_30px_rgba(139,92,246,0.6)]' : ''}`}
           </div>
           <p className="text-center text-slate-400 text-sm mt-4">💡 Tip: Haz clic en el código QR para verlo en grande</p>
         </div>
