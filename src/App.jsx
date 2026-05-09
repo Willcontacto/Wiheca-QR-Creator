@@ -49,16 +49,14 @@ export default function QRGeneratorApp() {
 
         {/* Panel izquierdo */}
         <div className="rounded-3xl shadow-xl bg-white p-8 flex flex-col gap-6">
-          <div>
-  <p className="text-xs font-semibold tracking-widest text-violet-500 uppercase mb-3">Wiheca</p>
-  <div className="flex items-center gap-4">
-    <div className="w-14 h-14 rounded-2xl bg-violet-500 flex items-center justify-center text-2xl shadow-md">
-      🔳
-    </div>
-    <div>
-      <h1 className="text-3xl font-bold text-slate-900">QR Creator</h1>
-      <p className="text-slate-500 text-sm mt-0.5">Crea códigos QR personalizados al instante ✨</p>
-    </div>
+          <div className="flex items-center gap-4">
+  <div className="w-14 h-14 rounded-2xl bg-violet-500 flex items-center justify-center text-2xl shadow-md">
+    🟪
+  </div>
+  <div>
+    <p className="text-xs font-semibold tracking-widest text-violet-500 uppercase">Wiheca</p>
+    <h1 className="text-3xl font-bold text-slate-900">QR Creator</h1>
+    <p className="text-slate-500 text-sm">Crea códigos QR personalizados al instante ✨</p>
   </div>
 </div>
 
