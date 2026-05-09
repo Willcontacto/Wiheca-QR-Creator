@@ -4,7 +4,7 @@ const qrColors = ['#000000','#1D4ED8','#7C3AED','#22C55E','#EF4444','#F59E0B'];
 const bgColors = ['#FFFFFF','#F5F3FF','#FEF3C7','#DBEAFE','#DCFCE7','#F8FAFC'];
 
 export default function QRGeneratorApp() {
-  const [text, setText] = useState('https://example.com');
+  const [text, setText] = useState('');
   const [generatedText, setGeneratedText] = useState('https://example.com');
   const [color, setColor] = useState('#000000');
   const [bgColor, setBgColor] = useState('#FFFFFF');
@@ -48,6 +48,7 @@ export default function QRGeneratorApp() {
               <input
                 type="text"
                 className="flex-1 bg-transparent outline-none text-base text-slate-800"
+                placeholder="https://example.com"
                 value={text}
                 onChange={(e) => setText(e.target.value)}
               />
