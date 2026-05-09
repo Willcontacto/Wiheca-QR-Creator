@@ -3,15 +3,6 @@ import React, { useState } from 'react';
 const qrColors = ['#000000','#1D4ED8','#7C3AED','#22C55E','#EF4444','#F59E0B'];
 const bgColors = ['#FFFFFF','#F5F3FF','#FEF3C7','#DBEAFE','#DCFCE7','#F8FAFC'];
 
-function Toggle({ enabled, onChange }) {
-  return (
-    <button onClick={() => onChange(!enabled)}
-      className={`relative inline-flex h-7 w-12 items-center rounded-full transition-colors duration-200 ${enabled ? 'bg-violet-600' : 'bg-slate-200'}`}>
-      <span className={`inline-block h-5 w-5 rounded-full bg-white shadow transition-transform duration-200 ${enabled ? 'translate-x-6' : 'translate-x-1'}`} />
-    </button>
-  );
-}
-
 export default function QRGeneratorApp() {
   const [text, setText] = useState('https://example.com');
   const [generatedText, setGeneratedText] = useState('https://example.com');
@@ -22,12 +13,8 @@ export default function QRGeneratorApp() {
   const [customBgColor, setCustomBgColor] = useState('#FFFFFF');
   const [showQrPicker, setShowQrPicker] = useState(false);
   const [showBgPicker, setShowBgPicker] = useState(false);
-  const [highQuality, setHighQuality] = useState(true);
-  const [margin, setMargin] = useState(true);
 
-  const size = highQuality ? 600 : 320;
-  const marginValue = margin ? 20 : 0;
-  const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=${size}x${size}&data=${encodeURIComponent(generatedText)}&color=${color.replace('#','')}&bgcolor=${bgColor.replace('#','')}&margin=${marginValue}`;
+  const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=600x600&data=${encodeURIComponent(generatedText)}&color=${color.replace('#','')}&bgcolor=${bgColor.replace('#','')}&margin=20`;
 
   const downloadQR = () => {
     const link = document.createElement('a');
@@ -40,31 +27,47 @@ export default function QRGeneratorApp() {
     <div className="min-h-screen bg-gradient-to-br from-[#f0eeff] to-[#f8fafc] p-6 md:p-8">
       <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-6">
 
+        {/* Panel izquierdo */}
         <div className="rounded-3xl shadow-xl bg-white p-8 space-y-7">
+
+          {/* Header */}
           <div className="flex items-center gap-4">
-            <div className="w-14 h-14 rounded-2xl bg-violet-600 flex items-center justify-center text-2xl shadow">QR</div>
+            <div className="w-14 h-14 rounded-2xl bg-violet-600 flex items-center justify-center shadow">
+              <span className="text-2xl">🔳</span>
+            </div>
             <div>
+              <p className="text-xs font-semibold tracking-[0.3em] uppercase text-violet-500 mb-1">Wiheca</p>
               <h1 className="text-3xl font-bold text-slate-900">QR Creator</h1>
-              <p className="text-slate-500 text-sm">Crea codigos QR personalizados al instante</p>
+              <p className="text-slate-500 text-sm">Crea códigos QR personalizados al instante ✨</p>
             </div>
           </div>
 
+          {/* Input contenido */}
           <div className="space-y-2">
             <label className="font-semibold text-slate-900">Contenido</label>
             <div className="flex items-center border border-slate-200 rounded-2xl px-4 h-14 gap-3 focus-within:ring-2 focus-within:ring-violet-400 bg-[#faf8ff]">
-              <input type="text" className="flex-1 bg-transparent outline-none text-base text-slate-800"
-                value={text} onChange={(e) => setText(e.target.value)} />
+              <span className="text-violet-400">🔗</span>
+              <input
+                type="text"
+                className="flex-1 bg-transparent outline-none text-base text-slate-800"
+                value={text}
+                onChange={(e) => setText(e.target.value)}
+              />
             </div>
             <p className="text-sm text-slate-400">Ingresa la URL o texto que quieres convertir en QR</p>
           </div>
 
-          <button onClick={() => setGeneratedText(text)}
+          {/* Botón generar */}
+          <button
+            onClick={() => setGeneratedText(text)}
             className="w-full h-14 rounded-2xl text-base font-semibold bg-violet-600 hover:bg-violet-700 text-white transition">
-            Generar QR
+            ✨ Generar QR
           </button>
 
+          {/* Personalización */}
           <div className="space-y-5 pt-4 border-t border-slate-100">
-            <h2 className="text-lg font-bold text-slate-900">Personalizacion</h2>
+            <h2 className="text-lg font-bold text-slate-900">Personalización</h2>
+
             <div>
               <p className="font-medium text-slate-700 mb-3">Color del QR</p>
               <div className="flex gap-3 flex-wrap">
@@ -78,6 +81,7 @@ export default function QRGeneratorApp() {
                   style={{ background: 'linear-gradient(135deg,#ff4d4f,#faad14,#52c41a,#1677ff,#722ed1)' }}>+</button>
               </div>
             </div>
+
             <div>
               <p className="font-medium text-slate-700 mb-3">Color del fondo</p>
               <div className="flex gap-3 flex-wrap">
@@ -93,35 +97,19 @@ export default function QRGeneratorApp() {
             </div>
           </div>
 
-          <div className="space-y-3 pt-2 border-t border-slate-100">
-            <h2 className="text-lg font-bold text-slate-900">Opciones</h2>
-            <div className="flex items-center justify-between p-4 rounded-2xl bg-slate-50">
-              <div>
-                <p className="font-semibold text-slate-800 text-sm">Alta calidad</p>
-                <p className="text-xs text-slate-400">Genera un QR en alta resolucion</p>
-              </div>
-              <Toggle enabled={highQuality} onChange={setHighQuality} />
-            </div>
-            <div className="flex items-center justify-between p-4 rounded-2xl bg-slate-50">
-              <div>
-                <p className="font-semibold text-slate-800 text-sm">Margen (quiet zone)</p>
-                <p className="text-xs text-slate-400">Agrega espacio alrededor del codigo</p>
-              </div>
-              <Toggle enabled={margin} onChange={setMargin} />
-            </div>
-          </div>
-
+          {/* Botón descargar */}
           <button onClick={downloadQR}
             className="w-full h-14 rounded-2xl text-base font-semibold bg-violet-600 hover:bg-violet-700 text-white transition">
-            Descargar QR
+            ⬇ Descargar QR
           </button>
         </div>
 
+        {/* Panel derecho */}
         <div className="rounded-3xl shadow-xl bg-white p-8 flex flex-col">
           <div className="flex items-center justify-between mb-6">
             <div>
               <h2 className="text-2xl font-bold text-slate-900">Vista previa</h2>
-              <p className="text-slate-500 text-sm">Escanea para probar tu codigo QR</p>
+              <p className="text-slate-500 text-sm">Escanea para probar tu código QR</p>
             </div>
             <button onClick={() => setIsExpanded(true)}
               className="px-4 py-2 rounded-xl border border-slate-200 text-slate-700 hover:bg-slate-50 transition text-sm font-medium">
@@ -132,7 +120,7 @@ export default function QRGeneratorApp() {
             <img src={qrUrl} alt="QR Code" onClick={() => setIsExpanded(true)}
               className="w-80 h-80 cursor-pointer transition hover:scale-105 rounded-xl" />
           </div>
-          <p className="text-center text-slate-400 text-sm mt-4">Tip: Haz clic en el codigo QR para verlo en grande</p>
+          <p className="text-center text-slate-400 text-sm mt-4">💡 Tip: Haz clic en el código QR para verlo en grande</p>
         </div>
       </div>
 
@@ -150,7 +138,7 @@ export default function QRGeneratorApp() {
             <input type="color" value={customQrColor}
               onChange={(e) => { setCustomQrColor(e.target.value); setColor(e.target.value); }}
               className="w-full h-20 rounded-2xl cursor-pointer" />
-            <button className="w-full h-12 rounded-2xl bg-violet-600 text-white font-semibold"
+            <button className="w-full h-12 rounded-2xl bg-violet-600 hover:bg-violet-700 text-white font-semibold transition"
               onClick={() => setShowQrPicker(false)}>Listo</button>
           </div>
         </div>
@@ -163,7 +151,7 @@ export default function QRGeneratorApp() {
             <input type="color" value={customBgColor}
               onChange={(e) => { setCustomBgColor(e.target.value); setBgColor(e.target.value); }}
               className="w-full h-20 rounded-2xl cursor-pointer" />
-            <button className="w-full h-12 rounded-2xl bg-violet-600 text-white font-semibold"
+            <button className="w-full h-12 rounded-2xl bg-violet-600 hover:bg-violet-700 text-white font-semibold transition"
               onClick={() => setShowBgPicker(false)}>Listo</button>
           </div>
         </div>
