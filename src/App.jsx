@@ -33,7 +33,7 @@ export default function QRGeneratorApp() {
           {/* Header */}
           <div className="flex items-center gap-4">
             <div className="w-14 h-14 rounded-2xl bg-violet-600 flex items-center justify-center shadow">
-              <span className="text-2xl">🔳</span>
+              <span className="text-2xl">🟪</span>
             </div>
             <div>
               <p className="text-xs font-semibold tracking-[0.3em] uppercase text-violet-500 mb-1">Wiheca</p>
