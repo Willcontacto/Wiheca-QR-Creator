@@ -50,7 +50,7 @@ export default function QRGeneratorApp() {
         {/* Panel izquierdo */}
         <div className="rounded-3xl shadow-xl bg-white p-8 flex flex-col gap-6">
           <div className="flex items-center gap-4">
-  <div className="w-14 h-14 rounded-2xl bg-violet-500 flex items-center justify-center text-2xl shadow-md">
+  <div className="text-5x1">
     🟪
   </div>
   <div>
