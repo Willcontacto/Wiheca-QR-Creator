@@ -18,15 +18,8 @@ export default function QRGeneratorApp() {
 
   const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=600x600&data=${encodeURIComponent(generatedText)}&color=${color.replace('#','')}&bgcolor=${bgColor.replace('#','')}&margin=20`;
 
-  const downloadQR = async () => {
-  const response = await fetch(qrUrl);
-  const blob = await response.blob();
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement('a');
-  link.href = url;
-  link.download = 'qrcode.png';
-  link.click();
-  URL.revokeObjectURL(url);
+  const downloadQR = () => {
+  window.open(qrUrl, '_blank');
 };
 
   const handleGenerate = () => {
@@ -54,7 +47,7 @@ export default function QRGeneratorApp() {
         {/* Panel izquierdo */}
         <div className="rounded-3xl shadow-xl bg-white p-8 flex flex-col gap-6">
           <div className="flex items-center gap-4">
-  <div style={{ fontSize: '40px', lineHeight: '1' }}>
+  <div style={{ fontSize: '42px', lineHeight: '1' }}>
   🟪
   </div>
   <div>
@@ -122,7 +115,7 @@ export default function QRGeneratorApp() {
           {/* Botón descargar */}
           <button onClick={downloadQR}
             className="w-full h-14 rounded-2xl text-base font-semibold bg-violet-600 hover:bg-violet-700 text-white transition">
-            ⬇ Descargar QR
+            ⬇ Abrir QR para guardar
           </button>
         </div>
 
