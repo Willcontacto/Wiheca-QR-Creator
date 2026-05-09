@@ -18,11 +18,10 @@ export default function QRGeneratorApp() {
 
   const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=600x600&data=${encodeURIComponent(generatedText)}&color=${color.replace('#','')}&bgcolor=${bgColor.replace('#','')}&margin=20`;
 
+  const downloadUrl = `https://api.qrserver.com/v1/create-qr-code/?size=600x600&data=${encodeURIComponent(generatedText)}&color=${color.replace('#','')}&bgcolor=${bgColor.replace('#','')}&margin=20&download=1&format=png`;
+
   const downloadQR = () => {
-  const link = document.createElement('a');
-  link.href = qrUrl + '&download=1';
-  link.target = '_blank';
-  link.click();
+  window.location.href = downloadUrl;
 };
 
   const handleGenerate = () => {
