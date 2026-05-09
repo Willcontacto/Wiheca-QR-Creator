@@ -50,8 +50,8 @@ export default function QRGeneratorApp() {
         {/* Panel izquierdo */}
         <div className="rounded-3xl shadow-xl bg-white p-8 flex flex-col gap-6">
           <div className="flex items-center gap-4">
-  <div className="w-16 h-16 rounded-2xl bg-violet-500 shadow-md">
-    🟪
+  <div style={{ fontSize: '64px', lineHeight: '1' }}>
+  🟪
   </div>
   <div>
     <p className="text-xs font-semibold tracking-widest text-violet-500 uppercase">Wiheca</p>
