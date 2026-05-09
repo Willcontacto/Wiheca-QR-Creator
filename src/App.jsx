@@ -25,7 +25,7 @@ export default function QRGeneratorApp() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#f0eeff] to-[#f8fafc] p-6 md:p-8 flex items-center justify-center">
-      <div className="max-w-5xl mx-auto grid lg:grid-cols-2 gap-6">
+      <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-6">
 
         {/* Panel izquierdo */}
         <div className="rounded-3xl shadow-xl bg-white p-8 space-y-7">
