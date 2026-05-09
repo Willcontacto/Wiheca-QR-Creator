@@ -117,7 +117,7 @@ export default function QRGeneratorApp() {
           {/* Botón descargar */}
           <button onClick={downloadQR}
             className="w-full h-14 rounded-2xl text-base font-semibold bg-violet-600 hover:bg-violet-700 active:scale-95 active:brightness-90 text-white transition-all duration-100">
-            ⬇ Abrir QR para guardar
+            ⬇ Descargar QR
           </button>
         </div>
 
