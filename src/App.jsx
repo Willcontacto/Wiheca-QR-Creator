@@ -50,7 +50,7 @@ export default function QRGeneratorApp() {
         {/* Panel izquierdo */}
         <div className="rounded-3xl shadow-xl bg-white p-8 flex flex-col gap-6">
           <div className="flex items-center gap-4">
-  <div style={{ fontSize: '64px', lineHeight: '1' }}>
+  <div style={{ fontSize: '40px', lineHeight: '1' }}>
   🟪
   </div>
   <div>
